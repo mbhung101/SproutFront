@@ -1,3 +1,15 @@
+Welcome to Sprout, the world's subjectively best online garden tracker app!
+With Sprout you can hopefully:
+1. Create a user page with alerts, picture and information
+2. View plants currently growing in your garden!
+3. Create a layout for your yard which you can add plants, and plan your yard
+4. Keep track of what conditions your vegetables are growing in
+5. Save that data as well as view other grower's data to see what's working well for them!
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
