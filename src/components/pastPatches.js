@@ -19,7 +19,7 @@ class PastPatches extends Component {
     return (
       <div>
         <div>
-        <Navbar brand="My Garden"  className="light-green" right>
+        <Navbar brand="My Past Gardens"  className="light-green" right>
         </Navbar>
         <div className= "row">
 
@@ -58,7 +58,7 @@ class PastPatches extends Component {
               <p> Date planted: 3/12/2017</p>
               <p> Yields so far: [192g,299g,231g]</p>
               <p> Watering schedule: Every day </p>
-              <p> Fertizler used: The ground up bones of my family </p>
+              <p> Fertizler used: The ground up bones of my dead family </p>
               <p> Notes: They're spicy, like my ex-wife's lover Raul! </p>
             </div>
           </div>

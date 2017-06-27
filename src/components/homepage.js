@@ -60,6 +60,10 @@ class Homepage extends Component {
           </div>
         </div>
         <br></br>
+        <Navbar brand="Weather"  className="light-green" right>
+        </Navbar>
+        <br></br>
+        <center> <a href="https://imgflip.com/i/1rluiw"><img src="https://i.imgflip.com/1rluiw.jpg" title="made at imgflip.com"/></a></center>
       </div>
     )
   }

@@ -16,7 +16,7 @@ class GardenContainer extends Component {
       alerts: [{message:"Slugs sighted near my begonias!",priority:"High",date:"1/2/1234"},
       {message:"I pooped my pants again",priority:"Medium",date:"1/2/1234"},
       {message:"Nothing brings me joy anymore",priority:"Low",date:"1/2/1234"}],
-      user: {FName:"Richard", LName: "Teekler", Age:70, State: "NY", City: "Bumblefuq", Bio: "My plants are the only thing preventing me from drinking enough cough syrup to fall asleep forever", username: "Deekteekler70", profilePic: "https://cdn0.iconfinder.com/data/icons/financial-business/512/agriculture_project-512.png"},
+      user: {FName:"Richard", LName: "Teekler", Age:70, State: "NY", City: "Bumblefuq", Bio: "My plants are the only thing preventing me from drinking enough cough syrup to fall asleep forever", username: "xoxoRichardTeekler70xoxo", profilePic: "https://cdn0.iconfinder.com/data/icons/financial-business/512/agriculture_project-512.png"},
       patches: [{type: 'Ghost Peppers', number:25, fertilizer: "Rick's Kronenberg Solution", yields:[10,12,41], spacing: 12, plantedOn: 5/12/1940, wateringSchedule: "daily", notes: "Sticking them in my ass is the only way I feel alive", img:""},
                {type: 'Ghost Peppers', number:20, fertilizer: "Children's bones", yields:[13,41,59], spacing: 15, plantedOn: 4/12/1940, wateringSchedule: "daily", notes: "Sticking them in my ass is the only way I feel alive", img:"" }  ]
     }
