@@ -10,6 +10,7 @@ class Alerts extends Component {
     this.alertDisplay = this.alertDisplay.bind(this)
   }
 
+
   changeAlerts(alerts){
     return alerts.map(function(alert){
        if (alert.priority === "High"){
@@ -25,13 +26,14 @@ class Alerts extends Component {
          return alert
        }
      })
+     return null
    }
 
 
   alertDisplay (){
     var newAlerts = this.changeAlerts(this.props.alerts)
     return this.props.alerts.map((alert)=>
-    <div> <h5> <span className = {alert.priority}> {alert.date+ " " + alert.message} </span> </h5> <br></br> </div>
+      <div> <h5> <span className = {alert.priority}> {alert.date+ " " + alert.message} </span> </h5> <br></br> </div>
     )
   }
 

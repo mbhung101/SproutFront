@@ -27,7 +27,7 @@ export default class AlertForm extends Component {
   render() {
     return(
       <div>
-        <form onSubmit={this.props.handleSubmit}>
+        <form onSubmit={this.props.handleAlertSubmit}>
           <input type="text" name="date" placeholder="Date" value={this.state.date} onChange={this.handleChange} /><br/>
           <input type="text" name="message" placeholder="Message" value={this.state.message} onChange={this.handleChange} /><br/>
           <Input type='select' defaultValue='1' label="Alert priority">

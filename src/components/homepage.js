@@ -17,12 +17,16 @@ class Homepage extends Component {
     super(props)
     this.state = {
       user: props.user,
-      alerts:props.alerts,
+      alerts: [{message:"Slugs sighted near my begonias!",priority:"High",date:"1/2/1234"},
+               {message:"I pooped my pants again",priority:"Medium",date:"1/2/1234"},
+               {message:"Nothing brings me joy anymore",priority:"Low",date:"1/2/1234"}],
       newAlertForm: false
     }
     this.render = this.render.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleAlertSubmit = this.handleAlertSubmit.bind(this)
   }
+
 
   handleClick (){
     this.setState({
@@ -31,9 +35,18 @@ class Homepage extends Component {
   }
 
   handleAlertSubmit(event) {
-
-  }
-
+    event.preventDefault()
+    var newAlert = {
+      date: event.target.children[0].value,
+      message:event.target.children[2].value,
+      priority: event.target[3].value
+    }
+    this.setState((previousState) => {
+      return {
+        alerts: [...previousState.alerts, newAlert]
+      }
+  })
+}
 
 
   render (){
@@ -43,20 +56,20 @@ class Homepage extends Component {
           <Navbar brand={this.state.user.username} className="light-green" href='/home'>
           </Navbar>
         </div>
-          <br></br>
-          <UserInfo user={this.state.user} />
-          <br></br>
-          <div>
+        <br></br>
+        <UserInfo user={this.state.user} />
+        <br></br>
+        <div>
           <Navbar brand="Alerts"  className="light-green" right>
           </Navbar>
-          </div>
+        </div>
         <div className = "row">
           <div className="col s6">
-            <Alerts alerts={this.state.alerts} handleClick={this.handleClick} handleAlertSubmit={this.handleAlertSubmit}/>
+            <Alerts alerts={this.state.alerts} handleClick={this.handleClick}/>
           </div>
           <br></br>
           <div className="col s6">
-            {this.state.newAlertForm? <AlertForm/> : null}
+            {this.state.newAlertForm? <AlertForm handleAlertSubmit={this.handleAlertSubmit}/> : null}
           </div>
         </div>
         <br></br>
