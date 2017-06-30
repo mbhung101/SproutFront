@@ -12,7 +12,7 @@ class UserForm extends Component {
         <Navbar brand= "Login/Sign Up" className="light-green" href='/home'>
         </Navbar>
       </div>
-        {(localStorage.user_id) ? <button onClick= {this.props.handleLogOut} className="btn waves-effect waves-light light-green" >Logout</button> : <LoginForm/>}
+        {(localStorage.user_id) ? <button onClick= {this.props.handleLogOut} className="btn waves-effect waves-light light-green" >Logout</button> : <LoginForm onLoginSubmit={this.props.onLoginSubmit}/>}
       </div>
 
     )

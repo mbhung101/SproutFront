@@ -33,6 +33,7 @@ class GardenContainer extends Component {
     })
   }
 
+
   handleLogOut(){
     localStorage.clear()
   }

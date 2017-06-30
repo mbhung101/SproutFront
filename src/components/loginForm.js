@@ -4,8 +4,8 @@ import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
 
 class LoginForm extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       fname: '',
       lname: '',
@@ -35,6 +35,7 @@ class LoginForm extends Component {
   }
 
   render(){
+    debugger
     return (
     <div>
     <div className = "row">
