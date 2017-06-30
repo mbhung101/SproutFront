@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Alerts from './alerts'
 import Patches from './patches'
 import UserInfo from './userInfo'
+import SproutAdapter from '../adapters'
 import AlertForm from './alertForm'
 import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
@@ -16,15 +17,32 @@ class Homepage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      user: props.user,
-      alerts: [{message:"Slugs sighted near my begonias!",priority:"High",date:"1/2/1234"},
-               {message:"I pooped my pants again",priority:"Medium",date:"1/2/1234"},
-               {message:"Nothing brings me joy anymore",priority:"Low",date:"1/2/1234"}],
-      newAlertForm: false
+      auth:{
+        isLoggedIn: false,
+        user:{}
+      }
+      ,
+      alerts:[]
     }
     this.render = this.render.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.handleAlertSubmit = this.handleAlertSubmit.bind(this)
+  }
+
+  componentDidMount(){
+    if (localStorage.user_id) {
+      SproutAdapter.currentUser(localStorage.user_id)
+        .then(user => {
+          if (!user.error) {
+            this.setState({
+              auth: {
+                isLoggedIn: true,
+                user: user
+              }
+            })
+          }
+        })
+    }
   }
 
 
@@ -39,25 +57,28 @@ class Homepage extends Component {
     var newAlert = {
       date: event.target.children[0].value,
       message:event.target.children[2].value,
-      priority: event.target[3].value
+      priority: event.target[3].value,
+      user: localStorage.user_id
     }
-    this.setState((previousState) => {
-      return {
-        alerts: [...previousState.alerts, newAlert]
-      }
-  })
+    debugger
+    SproutAdapter.createAlert(newAlert)
+      .then(alerts => this.setState((previousState)=>{
+        return {
+          alerts: [...previousState.alerts,newAlert]
+        }
+      })
+    )
 }
-
 
   render (){
     return (
       <div className= "container">
         <div>
-          <Navbar brand={this.state.user.username} className="light-green" href='/home'>
+          <Navbar brand={this.state.auth.user.username} className="light-green" href='/home'>
           </Navbar>
         </div>
         <br></br>
-        <UserInfo user={this.state.user} />
+        <UserInfo user={this.state.auth.user} />
         <br></br>
         <div>
           <Navbar brand="Alerts"  className="light-green" right>
@@ -81,12 +102,6 @@ class Homepage extends Component {
     )
   }
 }
-
-// <div className="col s7 center-align">
-//   <h4> My Layout </h4>
-// </div>
-//               <a href="https://imgflip.com/i/1rjb9m"><img src="https://i.imgflip.com/1rjb9m.jpg"/></a>
-
 
 
 

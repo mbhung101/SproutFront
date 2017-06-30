@@ -8,7 +8,7 @@ export default () => (
         <NavItem href='/gardens/current'>My Garden</NavItem>
         <NavItem href='/gardens/history'>Past Gardens</NavItem>
         <NavItem href='/stats'>Stats</NavItem>
-        <NavItem href='/gardens/login'>Login/Logout</NavItem>
+        <NavItem href='/login'>Login/Logout</NavItem>
       </Navbar>
     </div>
   </div>
