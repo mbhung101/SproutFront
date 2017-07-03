@@ -68,12 +68,13 @@ class Homepage extends Component {
     )
 }
 
-  deleteAlert (){
-    // AlertAdapter.deleteAlert(alert.id,localStorage.user_id)
-    //   .then(alerts => this.setState({
-    //       alerts: alerts
-    //   })
-    // )
+  deleteAlert (e){
+      e.preventDefault()
+      AlertAdapter.deleteAlert(e.target.parentElement.id,localStorage.user_id)
+      .then(alerts => this.setState({
+          alerts: alerts
+      })
+    )
   }
 
   render (){

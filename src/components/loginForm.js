@@ -41,8 +41,18 @@ class LoginForm extends Component {
 
   handleSignUpSubmit(e){
     e.preventDefault()
-    debugger
-    this.props.onLoginSubmit( this.state )
+    var newUser = {
+      fname: e.target.children[0].value,
+      lname: e.target.children[2].value,
+      age: e.target.children[4].value,
+      bio: e.target.children[6].value,
+      state: e.target.children[8].value,
+      city: e.target.children[10].value,
+      profilepic: e.target.children[12].value,
+      username: e.target.children[14].value,
+      password: e.target.children[16].value,
+    }
+    this.props.onSignUpSubmit( newUser )
   }
 
   render(){

@@ -5,7 +5,23 @@ export default class SproutAdapter  {
   static createUser(profile){
     return fetch("http://localhost:3000/api/users", {
       method: 'POST',
-      headers: this.headers(),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: profile
+      })
+    }).then(response => response.json() )
+  }
+
+  static editUser(profile,user_id){
+    return fetch(`http://localhost:3000/api/users/${user_id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
       body: JSON.stringify({
         user: profile
       })
@@ -35,12 +51,5 @@ static getUser(id){
   }).then(response => response.json() )
 }
 
-
-  static headers(){
-    return {
-      'content-type': 'application/json',
-      'accept': 'application/json'
-    }
-  }
 
 }

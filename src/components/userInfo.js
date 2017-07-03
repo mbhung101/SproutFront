@@ -18,7 +18,7 @@ render (){
   return (
     <div className="row">
       <div className="col s4">
-        <img src="https://cdn0.iconfinder.com/data/icons/financial-business/512/agriculture_project-512.png" style={{width:300, height:300}}/>
+        <img src={this.props.user.profilepic} style={{width:300, height:300}}/>
       </div>
       <div className = "col s3">
         <h5>First Name: </h5> {this.props.user.fname} <br></br>

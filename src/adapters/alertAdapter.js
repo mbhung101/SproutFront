@@ -35,7 +35,7 @@ export default class AlertAdapter  {
       body: JSON.stringify({
         alert: {
           id: alert_id,
-          user_id: localStorage.user_id
+          user_id: user_id
         }
       })
     }).then(response => response.json() )
