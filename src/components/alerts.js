@@ -48,12 +48,14 @@ class Alerts extends Component {
    }
 
 
-
   alertDisplay (){
     var newAlerts = this.changeAlerts(this.state.alerts)
+    if (this.state.alerts[0]) {
+      console.log(this.state.alerts[0].id)
+    }
     return this.state.alerts.map((alert)=>
-      <div className="row"> <div className = "col s10"><h5> <span className = {alert.priority}> {alert.date+ " " + alert.message} </span> </h5></div>
-      <Button onClick= {this.props.deleteAlert(alert)} floating small className='red' waves='light' icon='delete' />
+      <div  key={alert.id}   className="row"> <div className = "col s10"><h5> <span className={alert.priority}> {alert.date+ " " + alert.message} </span> </h5></div>
+      <Button id={alert.id} onClick={this.props.deleteAlert} floating className='red' waves='light' icon='delete' />
       <br></br>
       </div>
     )

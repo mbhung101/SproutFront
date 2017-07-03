@@ -20,10 +20,11 @@ class GardenContainer extends Component {
     }
     this.render = this.render.bind(this)
     this.handleLogOut = this.handleLogOut.bind(this)
+    this.onSignUpSubmit = this.onSignUpSubmit.bind(this)
+    this.onProfileEditSubmit = this.onProfileEditSubmit.bind(this)
     const currentUser = localStorage.user_id
 
   }
-
 
   onLoginSubmit(user){
      SproutAdapter.currentUser(user)
@@ -34,13 +35,29 @@ class GardenContainer extends Component {
     })
   }
 
-  onSignUpSubmit(){
-    SproutAdapter.currentUser()
+  onSignUpSubmit(profile){
+    SproutAdapter.createUser(profile)
+    .then(user => {
+      if (!user.error) {
+        localStorage.setItem("user_id",user.id)
+      }
+    })
+  }
+
+  onProfileEditSubmit (profile){
+    SproutAdapter.editUser (profile,localStorage.user_id)
+    .then(user => {
+      this.setState({
+        user:user
+      })
+    })
+    window.location = ('/home')
   }
 
 
   handleLogOut(){
     localStorage.clear()
+    window.location = ('/logon')
   }
 
   render (){
@@ -50,7 +67,7 @@ class GardenContainer extends Component {
         <div className = "container">
         <NavBar/>
         <Route exact path = '/home' render= {() =><Homepage onProfileEditSubmit={this.ß}/>}/>
-        <Route exact path = '/home/edit' render= {() =><EditProf user={this.state.user} onProfileEditSubmit={this.ß}/>}/>
+        <Route exact path = '/home/edit' render= {() =><EditProf user={this.state.user} onProfileEditSubmit={this.onProfileEditSubmit}/>}/>
         <Route exact path = '/gardens/current' render= {() =><Patches patches={this.state.patches}/>}/>
         <Route exact path = '/gardens/history' render= {() =><PastPatches patches={this.state.patches}/>}/>
         <Route exact path = '/login' render= {() =><UserForm onSignUpSubmit={this.onSignUpSubmit} onLoginSubmit={this.onLoginSubmit} handleLogOut={this.handleLogOut}/>}/>
@@ -62,7 +79,7 @@ class GardenContainer extends Component {
     return (
       <div>
       <NavBar/>
-      <UserForm handleLogOut={this.handleLogOut} onLoginSubmit={this.onLoginSubmit}/>
+      <UserForm handleLogOut={this.handleLogOut} onLoginSubmit={this.onLoginSubmit} onSignUpSubmit={this.onSignUpSubmit}/>
       </div>
     )
   }
