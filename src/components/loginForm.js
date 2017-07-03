@@ -21,6 +21,7 @@ class LoginForm extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
+    this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this)
   }
 
   handleChange(e){
@@ -31,17 +32,26 @@ class LoginForm extends Component {
 
   handleLoginSubmit(e){
     e.preventDefault()
+    var user = {
+      username: e.target.children[0].value,
+      password: e.target.children[2].value
+    }
+    this.props.onLoginSubmit(user)
+  }
+
+  handleSignUpSubmit(e){
+    e.preventDefault()
+    debugger
     this.props.onLoginSubmit( this.state )
   }
 
   render(){
-    debugger
     return (
     <div>
     <div className = "row">
       <div className = "col s3">
         <h4> Sign Up </h4>
-          <form onSubmit={this.onLoginSubmit}>
+          <form onSubmit={this.handleSignUpSubmit}>
             <input type="text" name="fname" placeholder="First Name" value={this.state.fname} onChange={this.handleChange} /><br/>
             <input type="text" name="lname" placeholder="Last Name" value={this.state.lname} onChange={this.handleChange} /><br/>
             <input type="number" name="age" placeholder="Age" value={this.state.date} onChange={this.handleChange} /><br/>

@@ -12,23 +12,27 @@ export default class SproutAdapter  {
     }).then(response => response.json() )
   }
 
-
-  static createAlert(newAlert){
-    return fetch("http://localhost:3000/alerts", {
+  static currentUser(user){
+    return fetch(`http://localhost:3000/api/currentuser`, {
       method: 'POST',
-      headers: this.headers(),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
       body: JSON.stringify({
-        alert: newAlert
+        user: user
       })
     }).then(response => response.json() )
-  }
+}
 
-
-  static currentUser(user){
-    return fetch(`http://localhost:3000/api/users/${user}`, {
-      method: 'GET',
-      headers: this.headers()
-      }).then(response => response.json() )
+static getUser(id){
+  return fetch(`http://localhost:3000/api/users/${id}`, {
+    method: 'Get',
+    headers: {
+      'content-type': 'application/json',
+      'accept': 'application/json'
+    },
+  }).then(response => response.json() )
 }
 
 

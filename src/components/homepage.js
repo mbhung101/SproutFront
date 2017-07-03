@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Alerts from './alerts'
 import Patches from './patches'
 import UserInfo from './userInfo'
-import SproutAdapter from '../adapters'
+import SproutAdapter from '../adapters/index'
+import AlertAdapter from '../adapters/alertAdapter'
 import AlertForm from './alertForm'
 import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
@@ -19,19 +20,19 @@ class Homepage extends Component {
     this.state = {
       auth:{
         isLoggedIn: false,
-        user:{}
+        user:{},
+        alerts: []
       }
-      ,
-      alerts:[]
     }
     this.render = this.render.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.handleAlertSubmit = this.handleAlertSubmit.bind(this)
+    this.deleteAlert = this.deleteAlert.bind(this)
   }
 
   componentDidMount(){
     if (localStorage.user_id) {
-      SproutAdapter.currentUser(localStorage.user_id)
+      SproutAdapter.getUser(localStorage.user_id)
         .then(user => {
           if (!user.error) {
             this.setState({
@@ -58,17 +59,22 @@ class Homepage extends Component {
       date: event.target.children[0].value,
       message:event.target.children[2].value,
       priority: event.target[3].value,
-      user: localStorage.user_id
+      user_id: localStorage.user_id
     }
-    debugger
-    SproutAdapter.createAlert(newAlert)
-      .then(alerts => this.setState((previousState)=>{
-        return {
-          alerts: [...previousState.alerts,newAlert]
-        }
+    AlertAdapter.createAlert(newAlert)
+      .then(alerts => this.setState({
+          alerts: alerts
       })
     )
 }
+
+  deleteAlert (){
+    // AlertAdapter.deleteAlert(alert.id,localStorage.user_id)
+    //   .then(alerts => this.setState({
+    //       alerts: alerts
+    //   })
+    // )
+  }
 
   render (){
     return (
@@ -86,7 +92,7 @@ class Homepage extends Component {
         </div>
         <div className = "row">
           <div className="col s6">
-            <Alerts alerts={this.state.alerts} handleClick={this.handleClick}/>
+            <Alerts handleClick={this.handleClick} alerts={this.state.alerts} deleteAlert={this.deleteAlert}/>
           </div>
           <br></br>
           <div className="col s6">

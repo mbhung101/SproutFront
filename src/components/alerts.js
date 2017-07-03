@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import AlertAdapter from '../adapters/alertAdapter'
 import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
 
 
@@ -6,12 +7,28 @@ class Alerts extends Component {
 
   constructor(props){
     super(props)
+    this.state = {
+      alerts: []
+    }
     this.render = this.render.bind(this)
     this.alertDisplay = this.alertDisplay.bind(this)
   }
 
+  componentWillReceiveProps(){
+      AlertAdapter.getAlerts(localStorage.user_id)
+        .then(alerts => {
+          if (!alerts.error) {
+            this.setState({
+              alerts: alerts
+            })
+          }
+        })
+      }
+
+
 
   changeAlerts(alerts){
+    if (alerts.length!==0){
     return alerts.map(function(alert){
        if (alert.priority === "High"){
          alert.priority = "red lighten-1"
@@ -26,14 +43,19 @@ class Alerts extends Component {
          return alert
        }
      })
+   }
      return null
    }
 
 
+
   alertDisplay (){
-    var newAlerts = this.changeAlerts(this.props.alerts)
-    return this.props.alerts.map((alert)=>
-      <div> <h5> <span className = {alert.priority}> {alert.date+ " " + alert.message} </span> </h5> <br></br> </div>
+    var newAlerts = this.changeAlerts(this.state.alerts)
+    return this.state.alerts.map((alert)=>
+      <div className="row"> <div className = "col s10"><h5> <span className = {alert.priority}> {alert.date+ " " + alert.message} </span> </h5></div>
+      <Button onClick= {this.props.deleteAlert(alert)} floating small className='red' waves='light' icon='delete' />
+      <br></br>
+      </div>
     )
   }
 
