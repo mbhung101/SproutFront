@@ -21,16 +21,21 @@ class GardenContainer extends Component {
     this.render = this.render.bind(this)
     this.handleLogOut = this.handleLogOut.bind(this)
     const currentUser = localStorage.user_id
+
   }
 
 
-  onLoginSubmit(profile){
-    SproutAdapter.createUser(profile)
+  onLoginSubmit(user){
+     SproutAdapter.currentUser(user)
     .then(user => {
       if (!user.error) {
         localStorage.setItem("user_id",user.id)
       }
     })
+  }
+
+  onSignUpSubmit(){
+    SproutAdapter.currentUser()
   }
 
 
@@ -48,7 +53,7 @@ class GardenContainer extends Component {
         <Route exact path = '/home/edit' render= {() =><EditProf user={this.state.user} onProfileEditSubmit={this.ß}/>}/>
         <Route exact path = '/gardens/current' render= {() =><Patches patches={this.state.patches}/>}/>
         <Route exact path = '/gardens/history' render= {() =><PastPatches patches={this.state.patches}/>}/>
-        <Route exact path = '/login' render= {() =><UserForm onLoginSubmit={this.onLoginSubmit} handleLogOut={this.handleLogOut}/>}/>
+        <Route exact path = '/login' render= {() =><UserForm onSignUpSubmit={this.onSignUpSubmit} onLoginSubmit={this.onLoginSubmit} handleLogOut={this.handleLogOut}/>}/>
         <Route exact path = '/stats' render= {() =><Stats/>}/>
         </div>
       </BrowserRouter>
