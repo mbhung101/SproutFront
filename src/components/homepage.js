@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Alerts from './alerts'
-import Patches from './patches'
 import UserInfo from './userInfo'
 import SproutAdapter from '../adapters/index'
 import AlertAdapter from '../adapters/alertAdapter'
