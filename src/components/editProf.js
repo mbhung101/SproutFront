@@ -1,14 +1,27 @@
 import React, { Component } from  'react'
+import SproutAdapter from '../adapters/index'
+
 
 export default class EditProf extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.render = this.render.bind(this)
   }
+
+  componentWillReceiveProps(){
+    debugger
+      SproutAdapter.getUser(localStorage.user_id)
+        .then(user => {
+          if (!user.error) {
+            this.setState({
+              user: user
+            })
+          }
+        })
+      }
 
   handleChange(event) {
     this.setState({

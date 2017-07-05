@@ -5,8 +5,8 @@ export default () => (
   <div className="container">
     <div>
       <Navbar brand='Sprout' className="light-green" href='/home' right>
-        <NavItem href='/gardens/current'>My Garden</NavItem>
-        <NavItem href='/gardens/history'>Past Gardens</NavItem>
+        <NavItem href='/gardens'>My Gardens</NavItem>
+        <NavItem href='/patches/all'>All My Patches</NavItem>
         <NavItem href='/stats'>Stats</NavItem>
         <NavItem href='/login'>Login/Logout</NavItem>
       </Navbar>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import Homepage from '../components/homepage'
-import Patches from '../components/patches'
-import PastPatches from '../components/pastPatches'
+import AllMyPatches from '../components/allMyPatches'
+import CurrentPatches from '../components/currentPatches'
 import Stats from '../components/stats'
 import UserForm from '../components/userForm'
 import NavBar from '../components/navbar'
@@ -25,6 +25,7 @@ class GardenContainer extends Component {
     const currentUser = localStorage.user_id
 
   }
+
 
   onLoginSubmit(user){
      SproutAdapter.currentUser(user)
@@ -66,10 +67,10 @@ class GardenContainer extends Component {
       <BrowserRouter>
         <div className = "container">
         <NavBar/>
-        <Route exact path = '/home' render= {() =><Homepage onProfileEditSubmit={this.ß}/>}/>
+        <Route exact path = '/home' render= {() =><Homepage/>}/>
         <Route exact path = '/home/edit' render= {() =><EditProf user={this.state.user} onProfileEditSubmit={this.onProfileEditSubmit}/>}/>
-        <Route exact path = '/gardens/current' render= {() =><Patches patches={this.state.patches}/>}/>
-        <Route exact path = '/gardens/history' render= {() =><PastPatches patches={this.state.patches}/>}/>
+        <Route exact path = '/gardens' render= {() =><CurrentPatches/>}/>
+        <Route exact path = '/patches/all' render= {() =><AllMyPatches/>}/>
         <Route exact path = '/login' render= {() =><UserForm onSignUpSubmit={this.onSignUpSubmit} onLoginSubmit={this.onLoginSubmit} handleLogOut={this.handleLogOut}/>}/>
         <Route exact path = '/stats' render= {() =><Stats/>}/>
         </div>
