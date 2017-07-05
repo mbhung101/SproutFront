@@ -46,7 +46,8 @@ class GardenContainer extends Component {
   }
 
   onProfileEditSubmit (profile){
-    SproutAdapter.editUser (profile,localStorage.user_id)
+    profile.id = localStorage.user_id
+    SproutAdapter.editUser (profile)
     .then(user => {
       this.setState({
         user:user
