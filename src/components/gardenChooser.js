@@ -1,5 +1,5 @@
 import React, { Component } from  'react'
-import { Button, Form, Input } from 'react-materialize';
+import { Button, Form, Input, Navbar } from 'react-materialize';
 
 
 export default class GardenChooser extends Component {
@@ -7,16 +7,27 @@ export default class GardenChooser extends Component {
     super(props)
   }
 
+  // componentDidMount (){
+  //   GardenAdapter.getGardens(localStorage.user_id)
+  // }
+
 // RENDER DROPDOWN AND NEW GARDEN FORM
+
 
   render() {
     return(
       <div>
-        <Input type='select' defaultValue='1' label="Choose Garden">
-          <option value='High'>High</option>
-          <option value='Medium'>Medium</option>
-          <option value='Low'>Low</option>
+      <Navbar brand="Choose Garden" className="light-green">
+      </Navbar>
+      <div className = 'row'>
+      <div className = "col s6">
+      <form onSubmit = {this.props.gardenChoice}>
+        <Input type='select' defaultValue='1'>
         </Input> <br></br>
+        <button className="btn waves-effect waves-light light-green" type="submit" name="action">Choose Garden</button>
+        </form>
+      </div>
+      </div>
       </div>
     )
   }

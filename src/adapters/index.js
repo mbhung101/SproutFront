@@ -15,8 +15,8 @@ export default class SproutAdapter  {
     }).then(response => response.json() )
   }
 
-  static editUser(profile,user_id){
-    return fetch(`http://localhost:3000/api/users/${user_id}`, {
+  static editUser(profile){
+    return fetch(`http://localhost:3000/api/users/${profile.id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -43,7 +43,7 @@ export default class SproutAdapter  {
 
 static getUser(id){
   return fetch(`http://localhost:3000/api/users/${id}`, {
-    method: 'Get',
+    method: 'GET',
     headers: {
       'content-type': 'application/json',
       'accept': 'application/json'
