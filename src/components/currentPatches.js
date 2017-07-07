@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
-import PatchAdapter from '../adapters/patchAdapter'
 import GardenChooser from './gardenChooser'
 import GardenAdapter from '../adapters/gardenAdapter'
 import SelectedGarden from './selectedGarden'
-import { Button, Row, Col, Navbar, NavItem, Card } from 'react-materialize';
 
 export default class CurrentPatches extends Component {
 

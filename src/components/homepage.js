@@ -4,9 +4,7 @@ import UserInfo from './userInfo'
 import SproutAdapter from '../adapters/index'
 import AlertAdapter from '../adapters/alertAdapter'
 import AlertForm from './alertForm'
-import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
-import { browserHistory } from 'react-router';
+import { Navbar} from 'react-materialize';
 
 
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import AlertAdapter from '../adapters/alertAdapter'
-import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
+import { Button} from 'react-materialize';
 
 
 class Alerts extends Component {

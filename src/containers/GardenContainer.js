@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter } from 'react-router-dom'
 import Homepage from '../components/homepage'
 import AllMyPatches from '../components/allMyPatches'
 import CurrentPatches from '../components/currentPatches'
 import Stats from '../components/stats'
 import UserForm from '../components/userForm'
-import SelectedGarden from '../components/selectedGarden'
 import NavBar from '../components/navbar'
 import SproutAdapter from '../adapters'
 import EditProf from '../components/editProf'
@@ -24,7 +23,6 @@ class GardenContainer extends Component {
     this.onSignUpSubmit = this.onSignUpSubmit.bind(this)
     this.onProfileEditSubmit = this.onProfileEditSubmit.bind(this)
     const currentUser = localStorage.user_id
-
   }
 
 

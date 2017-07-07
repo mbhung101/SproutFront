@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PatchAdapter from '../adapters/patchAdapter'
-import { Button, Row, Col, Navbar, NavItem, Card , Icon, Slider, Slide} from 'react-materialize';
+import {  Navbar, Card , Icon, Slider, Slide} from 'react-materialize';
 
 export default class AllMyPatches extends Component {
 

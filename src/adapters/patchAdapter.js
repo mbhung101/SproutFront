@@ -12,6 +12,23 @@ export default class PatchAdapter  {
     }).then(response => response.json() )
   }
 
+  static deletePatch(patchId,gardenId){
+    return fetch(`http://localhost:3000/api/patches/${patchId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({
+        patch: {
+          patch_id: patchId,
+          garden_id: gardenId
+        }
+      })
+    }).then(response => response.json() )
+  }
+
+
   static getGardenPatches(garden,user){
     return fetch(`http://localhost:3000/api/garden_patches`, {
       method: 'POST',
@@ -37,6 +54,20 @@ export default class PatchAdapter  {
       },
       body: JSON.stringify({
         patch:patch
+      })
+    }).then(response => response.json() )
+  }
+
+  static editPatch(patch,patch_id){
+    return fetch(`http://localhost:3000/api/patches/${patch.id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({
+        patch:patch,
+        patch_id: patch_id
       })
     }).then(response => response.json() )
   }

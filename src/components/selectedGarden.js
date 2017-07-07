@@ -7,7 +7,7 @@ export default class SelectedGarden extends Component {
   constructor(props){
     super(props)
     this.state={
-      patches: [],
+      patches: null,
       plant: "",
       number: 0,
       fertilizer: "",
@@ -23,12 +23,17 @@ export default class SelectedGarden extends Component {
       image3: "",
       image4: "",
       image5: "",
+      renderForm: false
     }
     this.gardenDisplay = this.gardenDisplay.bind(this)
     this.imageMapper = this.imageMapper.bind(this)
     this.render = this.render.bind(this)
+    this.onEditClick = this.onEditClick.bind(this)
+    this.onDeleteClick = this.onDeleteClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.newPatchSubmit = this.newPatchSubmit.bind(this)
+    this.renderForm = this.renderForm.bind(this)
+    this.editPatchSubmit = this.editPatchSubmit.bind(this)
   }
 
   componentWillMount(){
@@ -49,19 +54,36 @@ export default class SelectedGarden extends Component {
       )
     }
 
+    onEditClick(e){
+      this.setState({
+        renderForm: true
+      })
+    }
+
+    onDeleteClick(e){
+      PatchAdapter.deletePatch(e.target.parentElement.id,this.props.gardens)
+      .then( patches =>
+        this.setState({
+        patches: patches
+      })
+        )
+      }
+
 
   gardenDisplay (){
     return this.state.patches.map((patch)=>
-    <div key={patch.id}>
+
+    <div>
     <Card>
       <div className= "row">
-        <div className= "col s6" >
+
+        <div className= "col s4" >
         <Slider>
-        {this.imageMapper(patch.images)}
+          {this.imageMapper(patch.images)}
         </Slider>
         </div>
 
-        <div className= "col s3">
+        <div id={patch.id} className= "col s6" >
           <center> <h5> {patch.plant} </h5></center>
           <hr/>
             <p> Date planted: {patch.planted_on}</p>
@@ -75,18 +97,14 @@ export default class SelectedGarden extends Component {
             <p> Watering schedule: {patch.water} </p>
             <p> Fertizler used: {patch.fertilizer} </p>
             <p> Notes: {patch.notes} </p>
-          </div>
-          <div className = "col s2">
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <button className="btn waves-effect waves-light orange" >Harvest </button> <br></br> <br></br>
-            <button className="btn waves-effect waves-light light-green"> Edit</button> <br></br> <br></br>
-            <button className="btn waves-effect waves-light red"> Delete</button>
+            <button className="btn waves-effect waves-light orange" >Harvest </button>
+            <button onClick = {this.onEditClick} className="btn waves-effect waves-light light-green"> Edit</button>
+            <button onClick={this.onDeleteClick} className="btn waves-effect waves-light red"> Delete</button>
           </div>
       </div>
+        <div key={patch.id} id={patch.id} className = "row">
+          {(this.state.renderForm)? this.renderEditForm() : null}
+        </div>
     </Card>
     </div>
     )
@@ -96,6 +114,35 @@ export default class SelectedGarden extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  editPatchSubmit(event){
+    event.preventDefault()
+    var newPatch = {
+    plant: event.target.plant.value,
+    number: event.target.number.value,
+    fertilizer: event.target.fertilizer.value,
+    spacing: event.target.spacing.value,
+    planted_on: event.target.planted_on.value,
+    water: event.target.water.value,
+    sunlight: event.target.sunlight.value,
+    substrate: event.target.substrate.value,
+    seed_depth: event.target.seed_depth.value,
+    notes: event.target.notes.value,
+    user_id: localStorage.user_id,
+    garden_id: this.props.gardens,
+    image1: event.target.image1.value,
+    image2: event.target.image2.value,
+    image3: event.target.image3.value,
+    image4: event.target.image4.value,
+    image5: event.target.image5.value
+    }
+    PatchAdapter.editPatch(newPatch,event.target.parentElement.id)
+    .then( patches =>
+      this.setState({
+      patches: patches
+    })
+      )
   }
 
   newPatchSubmit(event){
@@ -142,37 +189,72 @@ export default class SelectedGarden extends Component {
       )
     }
 
+    renderForm(){
+      return (
+        <form onSubmit={this.newPatchSubmit}>
+        <div className = "col s4">
+          <h4> Plant Info </h4>
+          <input type="text" name="plant" placeholder="Plant Type" value={this.state.plant} onChange={this.handleChange} /><br/>
+          Number of Plants: <input type="number" name="number" placeholder="Number of Plants" value={this.state.number} onChange={this.handleChange} /><br/>
+          <input type="text" name="fertilizer" placeholder="Fertizler Used" value={this.state.fertilizer} onChange={this.handleChange} /><br/>
+          Plants Spacing(in): <input type="number" name="spacing" placeholder="Spacing(in)" value={this.state.spacing} onChange={this.handleChange} /><br/>
+          <input type="text" name="planted_on" placeholder="Planted On" value={this.state.planted_on} onChange={this.handleChange} /><br/>
+          <input type="text" name="water" placeholder="Watering Schedule" value={this.state.water} onChange={this.handleChange} /><br/>
+          <input type="text" name="sunlight" placeholder="Sunlight Received" value={this.state.sunlight} onChange={this.handleChange} /><br/>
+          <input type="text" name="substrate" placeholder="Substrate" value={this.state.substrate} onChange={this.handleChange} /><br/>
+          Seed Depth(in): <input type="number" name="seed_depth" placeholder="Seed Depth(in)" value={this.state.seed_depth} onChange={this.handleChange} /><br/>
+          <input type="textarea" name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleChange} /><br/>
+          <button className="btn waves-effect waves-light light-green" type="submit" name="action">Create Patch</button>
+        </div>
+        <div className = "col s4">
+          <h4> Images </h4>
+          <input type="text" name="image1" placeholder="Image URL" value={this.state.image1} onChange={this.handleChange} /><br/>
+          <input type="text" name="image2" placeholder="Image URL" value={this.state.image2} onChange={this.handleChange} /><br/>
+          <input type="text" name="image3" placeholder="Image URL" value={this.state.image3} onChange={this.handleChange} /><br/>
+          <input type="text" name="image4" placeholder="Image URL" value={this.state.image4} onChange={this.handleChange} /><br/>
+          <input type="text" name="image5" placeholder="Image URL" value={this.state.image5} onChange={this.handleChange} /><br/>
+        </div>
+        </form>
+      )
+    }
+
+    renderEditForm(){
+      return (
+        <form  onSubmit={this.editPatchSubmit}>
+        <div className = "col s6">
+          <h4> Plant Info </h4>
+          <input type="text" name="plant" placeholder="Plant Type" value={this.state.plant} onChange={this.handleChange} /><br/>
+          Number of Plants: <input type="number" name="number" placeholder="Number of Plants" value={this.state.number} onChange={this.handleChange} /><br/>
+          <input type="text" name="fertilizer" placeholder="Fertizler Used" value={this.state.fertilizer} onChange={this.handleChange} /><br/>
+          Plants Spacing(in): <input type="number" name="spacing" placeholder="Spacing(in)" value={this.state.spacing} onChange={this.handleChange} /><br/>
+          <input type="text" name="planted_on" placeholder="Planted On" value={this.state.planted_on} onChange={this.handleChange} /><br/>
+          <input type="text" name="water" placeholder="Watering Schedule" value={this.state.water} onChange={this.handleChange} /><br/>
+          <input type="text" name="sunlight" placeholder="Sunlight Received" value={this.state.sunlight} onChange={this.handleChange} /><br/>
+          <input type="text" name="substrate" placeholder="Substrate" value={this.state.substrate} onChange={this.handleChange} /><br/>
+          Seed Depth(in): <input type="number" name="seed_depth" placeholder="Seed Depth(in)" value={this.state.seed_depth} onChange={this.handleChange} /><br/>
+          <input type="textarea" name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleChange} /><br/>
+          <button className="btn waves-effect waves-light light-green" type="submit" name="action">Edit Patch</button>
+        </div>
+        <div className = "col s6">
+          <h4> Images </h4>
+          <input type="text" name="image1" placeholder="Image URL" value={this.state.image1} onChange={this.handleChange} /><br/>
+          <input type="text" name="image2" placeholder="Image URL" value={this.state.image2} onChange={this.handleChange} /><br/>
+          <input type="text" name="image3" placeholder="Image URL" value={this.state.image3} onChange={this.handleChange} /><br/>
+          <input type="text" name="image4" placeholder="Image URL" value={this.state.image4} onChange={this.handleChange} /><br/>
+          <input type="text" name="image5" placeholder="Image URL" value={this.state.image5} onChange={this.handleChange} /><br/>
+        </div>
+        </form>
+      )
+    }
+
   render (){
-    if (this.state.patches.length > 0){
+    if (this.state.patches){
     return (
       <div>
       <Navbar brand= "Add a Patch" className="light-green" right>
       </Navbar>
       <div className="row">
-      <form onSubmit={this.newPatchSubmit}>
-      <div className = "col s4">
-        <h4> Plant Info </h4>
-        <input type="text" name="plant" placeholder="Plant Type" value={this.state.plant} onChange={this.handleChange} /><br/>
-        Number of Plants: <input type="number" name="number" placeholder="Number of Plants" value={this.state.number} onChange={this.handleChange} /><br/>
-        <input type="text" name="fertilizer" placeholder="Fertizler Used" value={this.state.fertilizer} onChange={this.handleChange} /><br/>
-        Plants Spacing(in): <input type="number" name="spacing" placeholder="Spacing(in)" value={this.state.spacing} onChange={this.handleChange} /><br/>
-        <input type="text" name="planted_on" placeholder="Planted On" value={this.state.planted_on} onChange={this.handleChange} /><br/>
-        <input type="text" name="water" placeholder="Watering Schedule" value={this.state.water} onChange={this.handleChange} /><br/>
-        <input type="text" name="sunlight" placeholder="Sunlight Received" value={this.state.sunlight} onChange={this.handleChange} /><br/>
-        <input type="text" name="substrate" placeholder="Substrate" value={this.state.substrate} onChange={this.handleChange} /><br/>
-        Seed Depth(in): <input type="number" name="seed_depth" placeholder="Seed Depth(in)" value={this.state.seed_depth} onChange={this.handleChange} /><br/>
-        <input type="textarea" name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleChange} /><br/>
-        <button className="btn waves-effect waves-light light-green" type="submit" name="action">Create Patch</button>
-      </div>
-      <div className = "col s4">
-        <h4> Images </h4>
-        <input type="text" name="image1" placeholder="Image URL" value={this.state.image1} onChange={this.handleChange} /><br/>
-        <input type="text" name="image2" placeholder="Image URL" value={this.state.image2} onChange={this.handleChange} /><br/>
-        <input type="text" name="image3" placeholder="Image URL" value={this.state.image3} onChange={this.handleChange} /><br/>
-        <input type="text" name="image4" placeholder="Image URL" value={this.state.image4} onChange={this.handleChange} /><br/>
-        <input type="text" name="image5" placeholder="Image URL" value={this.state.image5} onChange={this.handleChange} /><br/>
-      </div>
-      </form>
+      {this.renderForm()}
       </div>
       <br></br>
       <Navbar brand= "My Garden" className="light-green" right>
@@ -183,7 +265,7 @@ export default class SelectedGarden extends Component {
   } else{
     return (
       <div>
-      No Patches to display <br></br>
+        return null
       </div>
     )
   }
