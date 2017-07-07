@@ -18,7 +18,8 @@ class Homepage extends Component {
       auth:{
         isLoggedIn: false,
         user:{},
-        alerts: []
+        alerts: [],
+        newAlertForm: false
       }
     }
     this.render = this.render.bind(this)
@@ -60,7 +61,8 @@ class Homepage extends Component {
     }
     AlertAdapter.createAlert(newAlert)
       .then(alerts => this.setState({
-          alerts: alerts
+          alerts: alerts,
+          newAlertForm: false
       })
     )
 }

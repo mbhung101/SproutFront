@@ -15,7 +15,6 @@ export default class GardenChooser extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-// RENDER DROPDOWN AND NEW GARDEN FORM
 
   gardenLister(gardens){
     return gardens.map((garden)=>{

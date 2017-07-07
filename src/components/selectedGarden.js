@@ -23,7 +23,7 @@ export default class SelectedGarden extends Component {
       image3: "",
       image4: "",
       image5: "",
-      renderForm: false
+      renderForm: 0
     }
     this.gardenDisplay = this.gardenDisplay.bind(this)
     this.imageMapper = this.imageMapper.bind(this)
@@ -46,17 +46,25 @@ export default class SelectedGarden extends Component {
       }
 
 
+
     imageMapper(imgs){
+      if (imgs.length > 0){
       return imgs.map((img)=>
       <Slide
         src={img.url}>
       </Slide>
       )
+    }else{
+      return 	<Slide
+		src="http://lorempixel.com/580/250/nature/1"
+		title="No pictures!">
+	   </Slide>
+    }
     }
 
     onEditClick(e){
       this.setState({
-        renderForm: true
+        renderForm: parseInt(e.target.parentElement.id)
       })
     }
 
@@ -103,7 +111,7 @@ export default class SelectedGarden extends Component {
           </div>
       </div>
         <div key={patch.id} id={patch.id} className = "row">
-          {(this.state.renderForm)? this.renderEditForm() : null}
+          {(this.state.renderForm !==0)? this.renderEditForm(patch) : null}
         </div>
     </Card>
     </div>
@@ -135,12 +143,14 @@ export default class SelectedGarden extends Component {
     image2: event.target.image2.value,
     image3: event.target.image3.value,
     image4: event.target.image4.value,
-    image5: event.target.image5.value
+    image5: event.target.image5.value,
+    patch_id: event.target.parentElement.id
     }
-    PatchAdapter.editPatch(newPatch,event.target.parentElement.id)
+    PatchAdapter.editPatch(newPatch)
     .then( patches =>
       this.setState({
-      patches: patches
+      patches: patches,
+      renderForm: 0
     })
       )
   }
@@ -218,21 +228,22 @@ export default class SelectedGarden extends Component {
       )
     }
 
-    renderEditForm(){
+    renderEditForm(patch){
+      if (patch.id === this.state.renderForm){
       return (
         <form  onSubmit={this.editPatchSubmit}>
         <div className = "col s6">
           <h4> Plant Info </h4>
-          <input type="text" name="plant" placeholder="Plant Type" value={this.state.plant} onChange={this.handleChange} /><br/>
-          Number of Plants: <input type="number" name="number" placeholder="Number of Plants" value={this.state.number} onChange={this.handleChange} /><br/>
-          <input type="text" name="fertilizer" placeholder="Fertizler Used" value={this.state.fertilizer} onChange={this.handleChange} /><br/>
-          Plants Spacing(in): <input type="number" name="spacing" placeholder="Spacing(in)" value={this.state.spacing} onChange={this.handleChange} /><br/>
-          <input type="text" name="planted_on" placeholder="Planted On" value={this.state.planted_on} onChange={this.handleChange} /><br/>
-          <input type="text" name="water" placeholder="Watering Schedule" value={this.state.water} onChange={this.handleChange} /><br/>
-          <input type="text" name="sunlight" placeholder="Sunlight Received" value={this.state.sunlight} onChange={this.handleChange} /><br/>
-          <input type="text" name="substrate" placeholder="Substrate" value={this.state.substrate} onChange={this.handleChange} /><br/>
-          Seed Depth(in): <input type="number" name="seed_depth" placeholder="Seed Depth(in)" value={this.state.seed_depth} onChange={this.handleChange} /><br/>
-          <input type="textarea" name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleChange} /><br/>
+          <input type="text" name="plant" value={patch.plant} onChange={this.handleChange} /><br/>
+          Number of Plants: <input type="number" name="number" value={patch.number}  value={this.state.number} onChange={this.handleChange} /><br/>
+          <input type="text" name="fertilizer"  placeholder= "Fertilzer" value={patch.fertilizer}  onChange={this.handleChange} /><br/>
+          Plants Spacing(in): <input type="number" name="spacing" value={patch.spacing} onChange={this.handleChange} /><br/>
+          <input type="text" name="planted_on"  placeholder= "Planted On" value={patch.planted_on}   onChange={this.handleChange} /><br/>
+          <input type="text" name="water" placeholder= "Watering Schedule" value={patch.water}  onChange={this.handleChange} /><br/>
+          <input type="text" name="sunlight"  placeholder= "Sunlght Received" value={patch.sunlight}  onChange={this.handleChange} /><br/>
+          <input type="text" name="substrate"  placeholder= "Substrate" value={patch.substrate}  onChange={this.handleChange} /><br/>
+          Seed Depth(in): <input type="number" name="seed_depth" value={patch.seed_depth}  onChange={this.handleChange} /><br/>
+          <input type="textarea" name="notes"  placeholder= "Notes" value={patch.notes}  onChange={this.handleChange} /><br/>
           <button className="btn waves-effect waves-light light-green" type="submit" name="action">Edit Patch</button>
         </div>
         <div className = "col s6">
@@ -245,6 +256,9 @@ export default class SelectedGarden extends Component {
         </div>
         </form>
       )
+    } else{
+      return null
+    }
     }
 
   render (){

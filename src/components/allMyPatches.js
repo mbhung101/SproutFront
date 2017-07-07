@@ -14,6 +14,7 @@ export default class AllMyPatches extends Component {
       this.onSearchSubmit = this.onSearchSubmit.bind(this)
       this.handleChange = this.handleChange.bind(this)
       this.imageMapper = this.imageMapper.bind(this)
+      this.yielder = this.yielder.bind(this)
     }
 
     componentDidMount(){
@@ -37,11 +38,19 @@ export default class AllMyPatches extends Component {
     )
     }
 
+    yielder (yields){
+      var total = 0
+      yields.map((y) => {
+        total += y.weight
+      })
+      return total
+    }
+
     gardenDisplay (){
       return this.state.patches.map((patch)=>
       <Card>
         <div className= "row">
-          <div className= "col s6" >
+          <div className= "col s4" >
           <Slider>
           {this.imageMapper(patch.images)}
           </Slider>
@@ -52,7 +61,7 @@ export default class AllMyPatches extends Component {
               <p> Date planted: {patch.planted_on}</p>
               <p> Garden: {patch.garden}</p>
               <p> Number of Plants: {patch.number}</p>
-              <p> Total Yield(g): {patch.total_yield}</p>
+              <p> Total Yield(g): {this.yielder(patch.yields)}</p>
               <p> Sunlight: {patch.sunlight} </p>
               <p> Substrate: {patch.substrate} </p>
               <p> Spacing (in): {patch.spacing} </p>

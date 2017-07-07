@@ -66,8 +66,7 @@ export default class PatchAdapter  {
         'accept': 'application/json'
       },
       body: JSON.stringify({
-        patch:patch,
-        patch_id: patch_id
+        patch:patch
       })
     }).then(response => response.json() )
   }

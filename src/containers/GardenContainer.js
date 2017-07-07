@@ -21,16 +21,20 @@ class GardenContainer extends Component {
     this.render = this.render.bind(this)
     this.handleLogOut = this.handleLogOut.bind(this)
     this.onSignUpSubmit = this.onSignUpSubmit.bind(this)
+    this.onLoginSubmit = this.onLoginSubmit.bind(this)
     this.onProfileEditSubmit = this.onProfileEditSubmit.bind(this)
     const currentUser = localStorage.user_id
   }
-
 
   onLoginSubmit(user){
      SproutAdapter.currentUser(user)
     .then(user => {
       if (!user.error) {
         localStorage.setItem("user_id",user.id)
+        this.setState({
+          user: user
+        })
+        window.location = ('/home')
       }
     })
   }
@@ -40,6 +44,10 @@ class GardenContainer extends Component {
     .then(user => {
       if (!user.error) {
         localStorage.setItem("user_id",user.id)
+        this.setState({
+          user: user
+        })
+        window.location = ('/home')
       }
     })
   }
