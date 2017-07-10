@@ -1,4 +1,15 @@
 export default class PatchAdapter  {
+
+  static allPatches(user){
+    return fetch(`http://localhost:3000/api/patches`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+    }).then(response => response.json() )
+  }
+
   static getPatches(user){
     return fetch(`http://localhost:3000/api/patches`, {
       method: 'POST',
@@ -67,6 +78,19 @@ export default class PatchAdapter  {
       },
       body: JSON.stringify({
         patch:patch
+      })
+    }).then(response => response.json() )
+  }
+
+  static newYield(y){
+    return fetch(`http://localhost:3000/api/yields`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({
+        yield: y
       })
     }).then(response => response.json() )
   }

@@ -4,6 +4,7 @@ import UserInfo from './userInfo'
 import SproutAdapter from '../adapters/index'
 import AlertAdapter from '../adapters/alertAdapter'
 import AlertForm from './alertForm'
+import Weather from './weather'
 import { Navbar} from 'react-materialize';
 
 
@@ -19,7 +20,10 @@ class Homepage extends Component {
         isLoggedIn: false,
         user:{},
         alerts: [],
-        newAlertForm: false
+        newAlertForm: false,
+        latitude: 0,
+        longitude: 0,
+        weather: false
       }
     }
     this.render = this.render.bind(this)
@@ -28,7 +32,10 @@ class Homepage extends Component {
     this.deleteAlert = this.deleteAlert.bind(this)
   }
 
-  componentDidMount(){
+
+
+
+  componentWillMount(){
     if (localStorage.user_id) {
       SproutAdapter.getUser(localStorage.user_id)
         .then(user => {
@@ -43,7 +50,6 @@ class Homepage extends Component {
         })
     }
   }
-
 
   handleClick (){
     this.setState({
@@ -90,6 +96,7 @@ class Homepage extends Component {
           <Navbar brand="Alerts"  className="light-green" right>
           </Navbar>
         </div>
+        <br></br>
         <div className = "row">
           <div className="col s6">
             <Alerts handleClick={this.handleClick} alerts={this.state.alerts} deleteAlert={this.deleteAlert}/>
@@ -103,7 +110,7 @@ class Homepage extends Component {
         <Navbar brand="Weather"  className="light-green" right>
         </Navbar>
         <br></br>
-        <center> <a href="https://imgflip.com/i/1rluiw"><img src="https://i.imgflip.com/1rluiw.jpg" title="made at imgflip.com"/></a></center>
+        <Weather/>
       </div>
     )
   }

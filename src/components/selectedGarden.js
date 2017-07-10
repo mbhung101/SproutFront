@@ -23,17 +23,24 @@ export default class SelectedGarden extends Component {
       image3: "",
       image4: "",
       image5: "",
-      renderForm: 0
+      renderForm: 0,
+      harvestForm: 0,
+      harvested_on: "",
+      yield: 0
     }
     this.gardenDisplay = this.gardenDisplay.bind(this)
     this.imageMapper = this.imageMapper.bind(this)
     this.render = this.render.bind(this)
+    this.harvestForm = this.harvestForm.bind(this)
+    this.onHarvestClick = this.onHarvestClick.bind(this)
+    this.onHarvestSubmit = this.onHarvestSubmit.bind(this)
     this.onEditClick = this.onEditClick.bind(this)
     this.onDeleteClick = this.onDeleteClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.newPatchSubmit = this.newPatchSubmit.bind(this)
     this.renderForm = this.renderForm.bind(this)
     this.editPatchSubmit = this.editPatchSubmit.bind(this)
+    this.yielder = this.yielder.bind(this)
   }
 
   componentWillMount(){
@@ -62,6 +69,12 @@ export default class SelectedGarden extends Component {
     }
     }
 
+    onHarvestClick(e){
+      this.setState({
+        harvestForm: parseInt(e.target.parentElement.id)
+      })
+    }
+
     onEditClick(e){
       this.setState({
         renderForm: parseInt(e.target.parentElement.id)
@@ -77,10 +90,17 @@ export default class SelectedGarden extends Component {
         )
       }
 
+      yielder (yields){
+        var total = 0
+        yields.map((y) => {
+          total += y.weight
+        })
+        return total
+      }
+
 
   gardenDisplay (){
     return this.state.patches.map((patch)=>
-
     <div>
     <Card>
       <div className= "row">
@@ -97,7 +117,7 @@ export default class SelectedGarden extends Component {
             <p> Date planted: {patch.planted_on}</p>
             <p> Garden: {patch.garden}</p>
             <p> Number of Plants: {patch.number}</p>
-            <p> Total Yield(g): {patch.total_yield}</p>
+            <p> Total Yield(g): {this.yielder(patch.yields)}</p>
             <p> Sunlight: {patch.sunlight} </p>
             <p> Substrate: {patch.substrate} </p>
             <p> Spacing (in): {patch.spacing} </p>
@@ -105,13 +125,16 @@ export default class SelectedGarden extends Component {
             <p> Watering schedule: {patch.water} </p>
             <p> Fertizler used: {patch.fertilizer} </p>
             <p> Notes: {patch.notes} </p>
-            <button className="btn waves-effect waves-light orange" >Harvest </button>
+            <button onClick ={this.onHarvestClick} className="btn waves-effect waves-light orange" >Harvest </button>
             <button onClick = {this.onEditClick} className="btn waves-effect waves-light light-green"> Edit</button>
             <button onClick={this.onDeleteClick} className="btn waves-effect waves-light red"> Delete</button>
           </div>
       </div>
         <div key={patch.id} id={patch.id} className = "row">
           {(this.state.renderForm !==0)? this.renderEditForm(patch) : null}
+        </div>
+        <div id={patch.id} className = "row">
+          {(this.state.harvestForm !==0)? this.harvestForm(patch) : null}
         </div>
     </Card>
     </div>
@@ -199,6 +222,40 @@ export default class SelectedGarden extends Component {
       )
     }
 
+    onHarvestSubmit(e){
+      e.preventDefault()
+      var newYield = {
+        weight: e.target.yield.value,
+        harvested_on: e.target.harvested_on.value,
+        patch_id: e.target.parentElement.id,
+        user_id: localStorage.user_id
+      }
+      PatchAdapter.newYield(newYield)
+      .then( patches =>
+        this.setState({
+          patches: patches,
+          harvestForm: 0,
+          yield: 0
+      })
+        )
+      }
+
+    harvestForm (patch){
+    if (patch.id === this.state.harvestForm){
+      return (
+      <form onSubmit={this.onHarvestSubmit}>
+        <div className = "col s4">
+        <input type="text" name="harvested_on" placeholder="Date Harvested" value={this.state.harvested_on} onChange={this.handleChange} /><br/>
+        Yield (g) : <input type="number" name="yield" placeholder="Yield" value={this.state.yield} onChange={this.handleChange} /><br/>
+        <button className="btn waves-effect waves-light orange" type="submit" name="action">Harvest Plant(s)</button>
+        </div>
+      </form>
+    )
+  }else{
+    return null
+  }
+    }
+
     renderForm(){
       return (
         <form onSubmit={this.newPatchSubmit}>
@@ -234,16 +291,16 @@ export default class SelectedGarden extends Component {
         <form  onSubmit={this.editPatchSubmit}>
         <div className = "col s6">
           <h4> Plant Info </h4>
-          <input type="text" name="plant" value={patch.plant} onChange={this.handleChange} /><br/>
-          Number of Plants: <input type="number" name="number" value={patch.number}  value={this.state.number} onChange={this.handleChange} /><br/>
-          <input type="text" name="fertilizer"  placeholder= "Fertilzer" value={patch.fertilizer}  onChange={this.handleChange} /><br/>
-          Plants Spacing(in): <input type="number" name="spacing" value={patch.spacing} onChange={this.handleChange} /><br/>
-          <input type="text" name="planted_on"  placeholder= "Planted On" value={patch.planted_on}   onChange={this.handleChange} /><br/>
-          <input type="text" name="water" placeholder= "Watering Schedule" value={patch.water}  onChange={this.handleChange} /><br/>
-          <input type="text" name="sunlight"  placeholder= "Sunlght Received" value={patch.sunlight}  onChange={this.handleChange} /><br/>
-          <input type="text" name="substrate"  placeholder= "Substrate" value={patch.substrate}  onChange={this.handleChange} /><br/>
-          Seed Depth(in): <input type="number" name="seed_depth" value={patch.seed_depth}  onChange={this.handleChange} /><br/>
-          <input type="textarea" name="notes"  placeholder= "Notes" value={patch.notes}  onChange={this.handleChange} /><br/>
+          <input type="text" name="plant" placeholder={patch.plant} value={this.state.plant} onChange={this.handleChange} /><br/>
+          Number of Plants: <input type="number" name="number" placeholder={patch.number}  value={this.state.number} onChange={this.handleChange} /><br/>
+          <input type="text" name="fertilizer"  placeholder= "Fertilzer" placeholder={patch.fertilizer} value= {this.state.fertilizer} onChange={this.handleChange} /><br/>
+          Plants Spacing(in): <input type="number" name="spacing" placeholder={patch.spacing} onChange={this.handleChange} /><br/>
+          <input type="text" name="planted_on"  placeholder= "Planted On" placeholder={patch.planted_on} value={this.state.planted_on}  onChange={this.handleChange} /><br/>
+          <input type="text" name="water" placeholder= "Watering Schedule" placeholder={patch.water} value={this.state.water}  onChange={this.handleChange} /><br/>
+          <input type="text" name="sunlight"  placeholder= "Sunlght Received" placeholder={patch.sunlight} value={this.state.sunlight}  onChange={this.handleChange} /><br/>
+          <input type="text" name="substrate"  placeholder= "Substrate" placeholder={patch.substrate} value={this.state.substrate} onChange={this.handleChange} /><br/>
+          Seed Depth(in): <input type="number" name="seed_depth" placeholder={patch.seed_depth} value = {this.state.seed_depth}  onChange={this.handleChange} /><br/>
+          <input type="textarea" name="notes"  placeholder= "Notes" placeholder={patch.notes} value={this.state.notes} onChange={this.handleChange} /><br/>
           <button className="btn waves-effect waves-light light-green" type="submit" name="action">Edit Patch</button>
         </div>
         <div className = "col s6">
