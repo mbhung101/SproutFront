@@ -1,5 +1,6 @@
 const baseUrl = 'http://localhost:3000/api'
 
+
 export default class SproutAdapter  {
 
   static createUser(profile){
@@ -25,6 +26,16 @@ export default class SproutAdapter  {
       body: JSON.stringify({
         user: profile
       })
+    }).then(response => response.json() )
+  }
+
+  static getWeather(lat,long){
+    return fetch(`https://api.darksky.net/forecast/7e0d24407036eacd9539c76dae30c6d8/${lat},${long}?exclude=currently,flags,hourly,minutely`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
     }).then(response => response.json() )
   }
 
