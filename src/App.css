@@ -37,8 +37,13 @@ input[type="textarea"] {
   left: 0;
   height: 100%;
   width: 100%;
+  background-color: white;
 }
 
+body {
+  background: url("http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/10/Hd-Bamboo-Forest-Wallpapers-Desktop-Computer.jpg");
+  background-size:cover
+}
 
 
 @keyframes App-logo-spin {

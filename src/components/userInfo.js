@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Row, Col, Navbar, NavItem } from 'react-materialize';
+import { Button} from 'react-materialize';
 
 
 class UserInfo extends Component {
