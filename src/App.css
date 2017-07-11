@@ -1,6 +1,6 @@
 a {
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .App {
@@ -48,10 +48,6 @@ input[type="textarea"] {
 body {
   background: url("http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/10/Hd-Bamboo-Forest-Wallpapers-Desktop-Computer.jpg");
   background-size:cover
-}
-
-Navbar {
-  padding-left: 80px;
 }
 
 @keyframes App-logo-spin {

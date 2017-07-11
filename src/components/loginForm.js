@@ -57,7 +57,7 @@ class LoginForm extends Component {
 
   render(){
     return (
-    <div>
+    <div style={{paddingLeft:20}}>
     <div className = "row">
       <div className = "col s3">
         <h4> Sign Up </h4>

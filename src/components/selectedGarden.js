@@ -258,7 +258,7 @@ export default class SelectedGarden extends Component {
 
     renderForm(){
       return (
-        <form onSubmit={this.newPatchSubmit}>
+        <form style={{paddingLeft:20}} onSubmit={this.newPatchSubmit}>
         <div className = "col s4">
           <h4> Plant Info </h4>
           <input type="text" name="plant" placeholder="Plant Type" value={this.state.plant} onChange={this.handleChange} /><br/>
@@ -322,13 +322,13 @@ export default class SelectedGarden extends Component {
     if (this.state.patches){
     return (
       <div>
-      <Navbar brand= "Add a Patch" className="light-green" right>
+      <Navbar style={{paddingLeft:20}} brand= "Add a Patch" className="light-green" right>
       </Navbar>
       <div className="row">
       {this.renderForm()}
       </div>
       <br></br>
-      <Navbar brand= "My Garden" className="light-green" right>
+      <Navbar style={{paddingLeft:20}} brand= "My Garden" className="light-green" right>
       </Navbar>
       {this.gardenDisplay()}
       </div>

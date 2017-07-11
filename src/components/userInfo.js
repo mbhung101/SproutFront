@@ -15,12 +15,21 @@ class UserInfo extends Component {
   }
 
 render (){
+  const hpStyle = {
+    paddingLeft: 20,
+    paddingRight: 20
+  }
+  const hpImg = {
+    paddingLeft: 20,
+    height: 300,
+    width: 400
+  }
   return (
-    <div className="row">
+    <div style={{paddingRight:20}} className="row">
       <div className="col s4">
-        <img src={this.props.user.profilepic} style={{width:300, height:300}}/>
+        <img  src={this.props.user.profilepic} style={hpImg}/>
       </div>
-      <div className = "col s3">
+      <div style={{paddingLeft:70}} className = "col s3">
         <h5>First Name: </h5> {this.props.user.fname} <br></br>
         <h5> Last Name: </h5> {this.props.user.lname}
         <h5> Age: </h5> {this.props.user.age}

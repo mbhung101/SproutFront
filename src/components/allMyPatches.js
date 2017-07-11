@@ -108,9 +108,9 @@ export default class AllMyPatches extends Component {
     render (){
       return (
         <div>
-          <Navbar brand="All Plants"  className="light-green" right>
+          <Navbar style={{paddingLeft:20}} brand="All Plants"  className="light-green" right>
           </Navbar>
-          <div className= "search-wrapper card">
+          <div style={{paddingLeft:20}} className= "search-wrapper card">
             <form onSubmit={this.onSearchSubmit}>
               <input type="text" name="search" placeholder="Search" value={this.state.search} onChange={this.handleChange} />
               <button className="btn waves-effect waves-light light-green" type="submit" name="action"> Reset </button><br/>

@@ -46,7 +46,7 @@ export default class Weather extends Component {
     else if (forecast.includes("snow")){
       return  <Icon large> ac_unit </Icon>
     }
-    else if (forecast.includes("rain") || forecast.includes("rainy") || forecast.includes("precipitation") || forecast.includes("drizle")){
+    else if (forecast.includes("rain") || forecast.includes("rainy") || forecast.includes("precipitation") || forecast.includes("drizzle")){
       return  <Icon large> beach_access </Icon>
     }
     else if (forecast.includes("foggy")){
@@ -60,7 +60,7 @@ export default class Weather extends Component {
 
       return  <Icon large> cloud_circle </Icon>
     }
-    else if (forecast.includes("cloud") || forecast.includes("cloudy")){
+    else if (forecast.includes("cloud") || forecast.includes("cloudy") || forecast.includes("overcast")){
 
       return  <Icon large> cloud </Icon>
     }
@@ -70,10 +70,13 @@ export default class Weather extends Component {
   }
 
   render (){
-    debugger
+    const hpStyle = {
+      paddingLeft: 20,
+      paddingRight: 20
+    }
     if (this.state.renderWeather === false){
     return (
-      <div className = "row">
+      <div style={hpStyle} className = "row">
       <div className = "col s4">
       <form onSubmit={this.onLocationSubmit}>
         <div>

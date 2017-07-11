@@ -62,8 +62,12 @@ class Alerts extends Component {
   }
 
   render (){
+    const hpStyle = {
+      paddingLeft: 20,
+      paddingRight: 20
+    }
     return (
-      <div>
+      <div style={hpStyle}>
         {this.alertDisplay()}
         <Button onClick={this.props.handleClick} className="light-green">Add an Alert</Button>
       </div>
