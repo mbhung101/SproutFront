@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import PatchAdapter from '../adapters/patchAdapter'
 import {  Navbar, Card , Icon, Slider, Slide} from 'react-materialize';
+import {Line as LineChart} from 'react-chartjs'
+
 
 export default class AllMyPatches extends Component {
 
@@ -14,6 +16,8 @@ export default class AllMyPatches extends Component {
       this.handleChange = this.handleChange.bind(this)
       this.imageMapper = this.imageMapper.bind(this)
       this.yielder = this.yielder.bind(this)
+      this.chartData = this.chartData.bind(this)
+      this.yieldSort = this.yieldSort.bind(this)
     }
 
     componentDidMount(){
@@ -52,6 +56,50 @@ export default class AllMyPatches extends Component {
       return total
     }
 
+    yieldSort (patch){
+      var months = [0,0,0,0,0,0,0,0,0,0,0,0]
+      patch.yields.forEach((y) => {
+        var split = y.harvested_on.split('/')
+        months[(split[0]-1)] += y.weight
+      })
+      return months
+    }
+
+
+    chartData (patch) {
+      var data = {
+          labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Spt","Nov","Dec"],
+          datasets: [{
+              label: 'grams',
+              data: this.yieldSort(patch),
+              fillColor: "rgb(0,187,0)",
+              borderWidth: 1
+          }]
+        }
+        return data
+      }
+
+      chartOptions (){
+        var options={
+        responsive: true,
+        animation:true,
+        bezierCurve: true,
+        bezierCurveTension: .4,
+        datasetFill:true,
+        showScale: true,
+        pointDot:false,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+    return options
+      }
+
     gardenDisplay (){
       return this.state.patches.map((patch)=>
       <Card>
@@ -61,9 +109,10 @@ export default class AllMyPatches extends Component {
           {this.imageMapper(patch.images)}
           </Slider>
           </div>
-          <div className= "col s6">
+          <div className= "col s4">
             <center> <h5> {patch.plant} </h5></center>
             <hr/>
+            <div style={{paddingTop:20}}>
             <p> Planted by: {patch.userName} </p>
             <p> Date planted: {patch.planted_on}</p>
             <p> Garden: {patch.garden}</p>
@@ -76,6 +125,16 @@ export default class AllMyPatches extends Component {
             <p> Watering schedule: {patch.water} </p>
             <p> Fertizler used: {patch.fertilizer} </p>
             <p> Notes: {patch.notes} </p>
+            </div>
+          </div>
+          <div className = "col s4">
+          <center> <h5> Yield History </h5> </center>
+          <hr/>
+          <div style={{paddingTop:20}}>
+          <div style={{width:400,height:250}} >
+          <LineChart data={this.chartData(patch)} options= {this.chartOptions()}/>
+          </div>
+          </div>
           </div>
         </div>
       </Card>
@@ -113,7 +172,7 @@ export default class AllMyPatches extends Component {
           <div style={{paddingLeft:20}} className= "search-wrapper card">
             <form onSubmit={this.onSearchSubmit}>
               <input type="text" name="search" placeholder="Search" value={this.state.search} onChange={this.handleChange} />
-              <button className="btn waves-effect waves-light light-green" type="submit" name="action"> Reset </button><br/>
+              <button className="btn waves-effect waves-light purple" type="submit" name="action"> Reset </button><br/>
             </form>
           </div>
           {this.gardenDisplay()}

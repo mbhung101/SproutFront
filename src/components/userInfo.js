@@ -41,7 +41,7 @@ render (){
         <hr/>
         {this.props.user.bio}
         <br></br>
-        <Button onClick = {this.editProfHandler} className="light-green">Redefine Yourself</Button>
+        <Button onClick = {this.editProfHandler} className="purple">Redefine Yourself</Button>
       </div>
     </div>
     )

@@ -67,7 +67,7 @@ export default class EditProf extends Component {
         <input type="text" name="city" placeholder={this.state.City} value={this.state.City} onChange={this.handleChange}  /><br/>
         <h5>Bio<br></br></h5>
         <input type="textarea" name="bio" placeholder={this.state.Bio} value={this.state.Bio} onChange={this.handleChange}  /><br/>
-        <button className="btn waves-effect waves-light light-green" type="submit" name="action">Edit Profile </button>
+        <button className="btn waves-effect waves-light purple" type="submit" name="action">Edit Profile </button>
         </form>
       </div>
     )

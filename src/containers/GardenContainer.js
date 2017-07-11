@@ -8,6 +8,7 @@ import UserForm from '../components/userForm'
 import NavBar from '../components/navbar'
 import SproutAdapter from '../adapters'
 import EditProf from '../components/editProf'
+import {Line as LineChart} from 'react-chartjs'
 
 
 
@@ -73,7 +74,7 @@ class GardenContainer extends Component {
     if (localStorage.user_id){
     return (
       <BrowserRouter>
-        <div className = "container">
+        <div id="main_container" className = "container">
         <NavBar/>
         <Route exact path = '/home' render= {() =><Homepage/>}/>
         <Route exact path = '/home/edit' render= {() =><EditProf user={this.state.user} onProfileEditSubmit={this.onProfileEditSubmit}/>}/>

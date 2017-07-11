@@ -85,7 +85,7 @@ export default class Weather extends Component {
         <div>
           <input type="number" step="any" name="longitude" placeholder="longitude" value={this.state.search} onChange={this.handleChange} />
         </div>
-        <button className="btn waves-effect waves-light light-green" type="submit" name="action"> Get Forecast </button><br/>
+        <button className="btn waves-effect waves-light purple" type="submit" name="action"> Get Forecast </button><br/>
       </form>
       </div>
       </div>

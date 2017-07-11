@@ -31,7 +31,7 @@ class Alerts extends Component {
     if (alerts.length!==0){
     return alerts.map(function(alert){
        if (alert.priority === "High"){
-         alert.priority = "red lighten-1"
+         alert.priority = "red"
          return alert
        }
        else if (alert.priority === "Medium"){
@@ -39,7 +39,7 @@ class Alerts extends Component {
          return alert
        }
        else if (alert.priority === "Low"){
-         alert.priority = "light-blue lighten-1"
+         alert.priority = "blue"
          return alert
        }
      })
@@ -54,7 +54,7 @@ class Alerts extends Component {
       console.log(this.state.alerts[0].id)
     }
     return this.state.alerts.map((alert)=>
-      <div  key={alert.id}   className="row"> <div className = "col s10"><h5> <span className={alert.priority}> {alert.date+ " " + alert.message} </span> </h5></div>
+      <div  key={alert.id}   className="row"> <div className = "col s10"><h5> <div id={alert.priority}> {alert.date+ " " + alert.message} </div> </h5></div>
       <Button id={alert.id} onClick={this.props.deleteAlert} floating className='red' waves='light' icon='delete' />
       <br></br>
       </div>
@@ -69,7 +69,7 @@ class Alerts extends Component {
     return (
       <div style={hpStyle}>
         {this.alertDisplay()}
-        <Button onClick={this.props.handleClick} className="light-green">Add an Alert</Button>
+        <Button onClick={this.props.handleClick} className="purple">Add an Alert</Button>
       </div>
     )
   }
