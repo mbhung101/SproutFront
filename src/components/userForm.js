@@ -9,10 +9,10 @@ class UserForm extends Component {
     return (
       <div>
       <div>
-        <Navbar brand= "Login/Sign Up" className="light-green" href='/home'>
+        <Navbar style={{paddingLeft:20}} brand= "Login/Sign Up" className="light-green" href='/home'>
         </Navbar>
       </div>
-        {(localStorage.user_id) ? <button onClick= {this.props.handleLogOut} className="btn waves-effect waves-light light-green" >Logout</button> : <LoginForm onLoginSubmit={this.props.onLoginSubmit} onSignUpSubmit={this.props.onSignUpSubmit}/>}
+        {(localStorage.user_id) ? <button onClick= {this.props.handleLogOut} className="btn waves-effect waves-light purple" >Logout</button> : <LoginForm onLoginSubmit={this.props.onLoginSubmit} onSignUpSubmit={this.props.onSignUpSubmit}/>}
       </div>
 
     )

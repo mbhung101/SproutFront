@@ -126,7 +126,7 @@ export default class SelectedGarden extends Component {
             <p> Fertizler used: {patch.fertilizer} </p>
             <p> Notes: {patch.notes} </p>
             <button onClick ={this.onHarvestClick} className="btn waves-effect waves-light orange" >Harvest </button>
-            <button onClick = {this.onEditClick} className="btn waves-effect waves-light light-green"> Edit</button>
+            <button onClick = {this.onEditClick} className="btn waves-effect waves-light purple"> Edit</button>
             <button onClick={this.onDeleteClick} className="btn waves-effect waves-light red"> Delete</button>
           </div>
       </div>
@@ -245,7 +245,7 @@ export default class SelectedGarden extends Component {
       return (
       <form onSubmit={this.onHarvestSubmit}>
         <div className = "col s4">
-        <input type="text" name="harvested_on" placeholder="Date Harvested" value={this.state.harvested_on} onChange={this.handleChange} /><br/>
+        <input type="text" name="harvested_on" placeholder="Date Harvested (mm/dd/yyyy)" value={this.state.harvested_on} onChange={this.handleChange} /><br/>
         Yield (g) : <input type="number" name="yield" placeholder="Yield" value={this.state.yield} onChange={this.handleChange} /><br/>
         <button className="btn waves-effect waves-light orange" type="submit" name="action">Harvest Plant(s)</button>
         </div>
@@ -258,7 +258,7 @@ export default class SelectedGarden extends Component {
 
     renderForm(){
       return (
-        <form onSubmit={this.newPatchSubmit}>
+        <form style={{paddingLeft:20}} onSubmit={this.newPatchSubmit}>
         <div className = "col s4">
           <h4> Plant Info </h4>
           <input type="text" name="plant" placeholder="Plant Type" value={this.state.plant} onChange={this.handleChange} /><br/>
@@ -271,7 +271,7 @@ export default class SelectedGarden extends Component {
           <input type="text" name="substrate" placeholder="Substrate" value={this.state.substrate} onChange={this.handleChange} /><br/>
           Seed Depth(in): <input type="number" name="seed_depth" placeholder="Seed Depth(in)" value={this.state.seed_depth} onChange={this.handleChange} /><br/>
           <input type="textarea" name="notes" placeholder="Notes" value={this.state.notes} onChange={this.handleChange} /><br/>
-          <button className="btn waves-effect waves-light light-green" type="submit" name="action">Create Patch</button>
+          <button className="btn waves-effect waves-light purple" type="submit" name="action">Create Patch</button>
         </div>
         <div className = "col s4">
           <h4> Images </h4>
@@ -301,7 +301,7 @@ export default class SelectedGarden extends Component {
           <input type="text" name="substrate"  placeholder= "Substrate" placeholder={patch.substrate} value={this.state.substrate} onChange={this.handleChange} /><br/>
           Seed Depth(in): <input type="number" name="seed_depth" placeholder={patch.seed_depth} value = {this.state.seed_depth}  onChange={this.handleChange} /><br/>
           <input type="textarea" name="notes"  placeholder= "Notes" placeholder={patch.notes} value={this.state.notes} onChange={this.handleChange} /><br/>
-          <button className="btn waves-effect waves-light light-green" type="submit" name="action">Edit Patch</button>
+          <button className="btn waves-effect waves-light purple" type="submit" name="action">Edit Patch</button>
         </div>
         <div className = "col s6">
           <h4> Images </h4>
@@ -322,13 +322,13 @@ export default class SelectedGarden extends Component {
     if (this.state.patches){
     return (
       <div>
-      <Navbar brand= "Add a Patch" className="light-green" right>
+      <Navbar style={{paddingLeft:20}} brand= "Add a Patch" className="light-green" right>
       </Navbar>
       <div className="row">
       {this.renderForm()}
       </div>
       <br></br>
-      <Navbar brand= "My Garden" className="light-green" right>
+      <Navbar style={{paddingLeft:20}} brand= "My Garden" className="light-green" right>
       </Navbar>
       {this.gardenDisplay()}
       </div>

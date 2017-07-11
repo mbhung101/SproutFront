@@ -35,7 +35,7 @@ export default class AlertForm extends Component {
         		<option value='Medium'>Medium</option>
         		<option value='Low'>Low</option>
         	</Input> <br></br>
-          <button className="btn waves-effect waves-light light-green" type="submit" name="action">Create Alert </button>
+          <button className="btn waves-effect waves-light purple" type="submit" name="action">Create Alert </button>
         </form>
       </div>
     )

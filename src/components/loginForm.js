@@ -57,7 +57,7 @@ class LoginForm extends Component {
 
   render(){
     return (
-    <div>
+    <div style={{paddingLeft:20}}>
     <div className = "row">
       <div className = "col s3">
         <h4> Sign Up </h4>
@@ -71,7 +71,7 @@ class LoginForm extends Component {
             <input type="text" name="profilepic" placeholder="Profile Pic Link" value={this.state.profilepic} onChange={this.handleChange} /><br/>
             <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} /><br/>
             <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} /><br/>
-            <button className="btn waves-effect waves-light light-green" type="submit" name="action">Sign Up</button>
+            <button className="btn waves-effect waves-light purple" type="submit" name="action">Sign Up</button>
           </form>
         </div>
         <div className= "col s4 offset-s4">
@@ -79,7 +79,7 @@ class LoginForm extends Component {
         <form onSubmit={this.handleLoginSubmit}>
           <input type="text" name="logusername" placeholder="username" value={this.state.logname} onChange={this.handleChange} /><br/>
           <input type="password" name="logpassword" placeholder="password" value={this.state.logpass} onChange={this.handleChange}/><br/>
-          <button className="btn waves-effect waves-light light-green" type="submit" name="action">Log In</button>
+          <button className="btn waves-effect waves-light purple" type="submit" name="action">Log In</button>
         </form>
         </div>
       </div>

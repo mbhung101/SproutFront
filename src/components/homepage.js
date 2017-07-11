@@ -86,14 +86,14 @@ class Homepage extends Component {
     return (
       <div className= "container">
         <div>
-          <Navbar brand={this.state.auth.user.username} className="light-green" href='/home'>
+          <Navbar style={{paddingLeft:20}} brand={this.state.auth.user.username} className="light-green" href='/home'>
           </Navbar>
         </div>
         <br></br>
         <UserInfo user={this.state.auth.user} />
         <br></br>
         <div>
-          <Navbar brand="Alerts"  className="light-green" right>
+          <Navbar brand="Alerts" style={{paddingLeft:20}} className="light-green" right>
           </Navbar>
         </div>
         <br></br>
@@ -107,7 +107,7 @@ class Homepage extends Component {
           </div>
         </div>
         <br></br>
-        <Navbar brand="Weather"  className="light-green" right>
+        <Navbar  style={{paddingLeft:20}} brand="Weather"  className="light-green" right>
         </Navbar>
         <br></br>
         <Weather/>

@@ -1,3 +1,8 @@
+a {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
 .App {
   text-align: left;
 }
@@ -19,7 +24,7 @@
 }
 
 input[type=number]{
-    width: 80px;
+    width: 100px;
 }
 
 
@@ -37,16 +42,48 @@ input[type="textarea"] {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: white;
+
+  margin-top: 10px;
+
 }
 
 body {
   background: url("http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/10/Hd-Bamboo-Forest-Wallpapers-Desktop-Computer.jpg");
+  background-attachment: fixed;
   background-size:cover
 }
-
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.container#main_container  {
+
+
+  background-color:rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  border-radius: 10px;
+
+}
+
+#yellow {
+  background-color:rgba(241, 196, 15,0.5);
+  border: 5px solid rgba(241, 196, 15,1.0);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#blue {
+  background-color:rgba(41, 128, 185,.5);
+  border: 5px solid rgba(41, 128, 185,1.0);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#red {
+  background-color:rgba(231, 76, 60,.5);
+  border: 5px solid rgba(231, 76, 60,1.0);
+  border-radius: 10px;
+  padding: 5px;
 }

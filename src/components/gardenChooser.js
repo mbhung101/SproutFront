@@ -32,11 +32,11 @@ export default class GardenChooser extends Component {
   render() {
     return(
       <div>
-        <Navbar brand="Choose a Garden" className="light-green">
+        <Navbar style={{paddingLeft:20}} brand="Choose a Garden" className="light-green">
         </Navbar>
         <div className = 'row'>
         <div className = "col s6">
-        <form onSubmit = {this.props.gardenChoice}>
+        <form  style={{padding:10}} onSubmit = {this.props.gardenChoice}>
           <Input type='select' defaultValue='1'>
           {this.gardenLister(this.props.gardens)}
           </Input> <br></br>
@@ -44,9 +44,9 @@ export default class GardenChooser extends Component {
           </form>
         </div>
         </div>
-        <Navbar brand="Create a New Garden" className="light-green">
+        <Navbar  style={{paddingLeft:20}} brand="Create a New Garden" className="light-green">
         </Navbar>
-        <form onSubmit={this.props.onNewGardenSubmit}>
+        <form  style={{padding:20}} onSubmit={this.props.onNewGardenSubmit}>
           <input type="number" name="year" placeholder="Year" value={this.state.date} onChange={this.handleChange} /><br/>
           <input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.handleChange} /><br/>
           <button className="btn waves-effect waves-light light-green" type="submit" name="action">Create Garden </button>
