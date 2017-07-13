@@ -228,7 +228,8 @@ export default class SelectedGarden extends Component {
         weight: e.target.yield.value,
         harvested_on: e.target.harvested_on.value,
         patch_id: e.target.parentElement.id,
-        user_id: localStorage.user_id
+        user_id: localStorage.user_id,
+        garden_id: this.props.gardens
       }
       PatchAdapter.newYield(newYield)
       .then( patches =>
