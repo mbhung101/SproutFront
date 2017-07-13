@@ -51,10 +51,6 @@ export default class CurrentPatches extends Component {
     )
   }
 
-
-// WILL RENDER GARDENCHOOSER OF GARDEN NAME AND YEAR IF GARDEN = null
-// OTHERWISE, WILL RENDER LAYOUT, ADD PATCH AND CHANGABLE GARDEN CARDS
-
   render (){
     if (this.state.gardens !== null && this.state.currentGarden === null){
     return (
@@ -62,7 +58,7 @@ export default class CurrentPatches extends Component {
         <GardenChooser gardenChoice={this.gardenChoice} gardens={this.state.gardens} onNewGardenSubmit={this.newGardenSubmit}/>
       </div>
       )
-    } else if (this.state.gardens !== null && this.state.currentGarden !== null){
+    } else if (this.state.gardens && this.state.currentGarden !== null){
       return(
       <div>
       <SelectedGarden gardens={this.state.currentGarden}/>
