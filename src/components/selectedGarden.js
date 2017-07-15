@@ -173,7 +173,26 @@ export default class SelectedGarden extends Component {
     .then( patches =>
       this.setState({
       patches: patches,
-      renderForm: 0
+      renderForm: 0,
+      plant: "",
+      number: 0,
+      fertilizer: "",
+      spacing: 0,
+      planted_on: "",
+      water: "",
+      sunlight: "",
+      substrate: "",
+      seed_depth: "",
+      notes: "",
+      image1: "",
+      image2: "",
+      image3: "",
+      image4: "",
+      image5: "",
+      renderForm: 0,
+      harvestForm: 0,
+      harvested_on: "",
+      yield: 0
     })
       )
   }

@@ -124,7 +124,7 @@ export default class Stats extends Component {
           <p> Date planted: {patch.planted_on}</p>
           <p> Garden: {patch.garden}</p>
           <p> Number of Plants: {patch.number}</p>
-          <p> Total Yield(g): {this.yielder(patch.yields)}</p>          
+          <p> Total Yield(g): {this.yielder(patch.yields)}</p>
           <p> Sunlight: {patch.sunlight} </p>
           <p> Substrate: {patch.substrate} </p>
           <p> Spacing (in): {patch.spacing} </p>
@@ -213,6 +213,9 @@ export default class Stats extends Component {
 
 
     chartData2 (patch1,patch2) {
+      if (patch1 === patch2){
+        throw 'Error'
+      }
       var patches = this.state.patches.filter(function(patch){
         return (patch.id.toString() === patch1 || patch.id.toString() === patch2)
       })
@@ -227,12 +230,14 @@ export default class Stats extends Component {
               label: name1,
               data: yieldMap[0],
               fillColor: "rgba(46, 204, 113,1.0)",
+              borderColor:"rgba(46, 204, 113,1.0)",
               borderWidth: 1
           },
           {
               label: name2,
               data: yieldMap[1],
               fillColor: "rgba(142, 68, 173,.7)",
+              borderColor:"rgba(46, 204, 113,1.0)",
               borderWidth: 1
           }
         ]
@@ -294,7 +299,7 @@ export default class Stats extends Component {
         </div>
         </div>
         <br></br>
-        {this.state.renderSeason ? <LineChart data={this.chartData(this.state.selected)} options= {this.chartOptions()}/> : null}
+        {this.state.renderSeason ?<div style={{paddingLeft:90,height:500,width:1200}}> <LineChart data={this.chartData(this.state.selected)} options= {this.chartOptions()}/> </div> : null}
         <Navbar style={{paddingLeft:20}} brand="Plant Comparison"  className="light-green" right> </Navbar>
         <form style={{padding:20}} onSubmit={this.compareSubmit}>
         <div className= "row">
