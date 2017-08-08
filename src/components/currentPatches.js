@@ -26,7 +26,6 @@ export default class CurrentPatches extends Component {
       }
 
 
-
   gardenChoice (e){
     e.preventDefault()
     this.setState({

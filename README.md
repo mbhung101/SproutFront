@@ -1,5 +1,5 @@
 Welcome to Sprout, the world's subjectively best online garden tracker app!
-With Sprout you can hopefully:
+With Sprout you can:
 1. Create a user with alerts, picture and information
 2. Check the weather for the coordinates of your garden
 3. View plants currently growing in your garden!

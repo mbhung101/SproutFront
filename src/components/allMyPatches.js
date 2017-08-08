@@ -36,16 +36,14 @@ export default class AllMyPatches extends Component {
     imageMapper(imgs){
       if (imgs.length > 0){
       return imgs.map((img)=>
-      <Slide
-        src={img.url}>
-      </Slide>
+        <Slide src={img.url}>
+        </Slide>
       )
-    }else{
-      return 	<Slide
-		src="http://lorempixel.com/580/250/nature/1"
-		title="No pictures!">
-	   </Slide>
-    }
+      }else{
+        return
+        <Slide src="http://lorempixel.com/580/250/nature/1" title="No pictures!">
+	      </Slide>
+      }
     }
 
     yielder (yields){
