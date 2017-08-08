@@ -29,7 +29,7 @@ class Alerts extends Component {
 
   changeAlerts(alerts){
     if (alerts.length!==0){
-    return alerts.map(function(alert){
+      return alerts.map(function(alert){
        if (alert.priority === "High"){
          alert.priority = "red"
          return alert
@@ -50,13 +50,11 @@ class Alerts extends Component {
 
   alertDisplay (){
     var newAlerts = this.changeAlerts(this.state.alerts)
-    if (this.state.alerts[0]) {
-      console.log(this.state.alerts[0].id)
-    }
     return this.state.alerts.map((alert)=>
-      <div key={alert.id}   className="row"> <div className = "col s10"><h5> <div id={alert.priority}> {alert.date+ " " + alert.message} </div> </h5></div>
+      <div key={alert.id}   className="row">
+        <div className = "col s10"><h5> <div id={alert.priority}> {alert.date+ " " + alert.message} </div> </h5></div>
       <div style={{paddingTop:25}}>
-      <Button id={alert.id} onClick={this.props.deleteAlert} floating className='red' waves='light' icon='delete' />
+        <Button id={alert.id} onClick={this.props.deleteAlert} floating className='red' waves='light' icon='delete' />
       </div>
       <br></br>
       </div>
@@ -65,10 +63,10 @@ class Alerts extends Component {
 
   render (){
     return (
-        <div>
-          {this.alertDisplay()}
-          <Button onClick={this.props.handleClick} className="purple">Add an Alert</Button>
-        </div>
+      <div style={{paddingLeft:20}}>
+        {this.alertDisplay()}
+        <Button  onClick={this.props.handleClick} className="purple">Add an Alert</Button>
+      </div>
     )
   }
 }

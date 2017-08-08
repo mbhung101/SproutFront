@@ -1,5 +1,5 @@
 const baseUrl = 'http://localhost:3000/api'
-const key = "7e0d24407036eacd9539c76dae30c6d8"
+const key = "80bc0a04935bae94c866fd1705556584"
 
 export default class SproutAdapter  {
 
@@ -30,7 +30,7 @@ export default class SproutAdapter  {
   }
 
   static getWeather(lat,long){
-    return fetch(`https://api.darksky.net/forecast/7e0d24407036eacd9539c76dae30c6d8/${lat},${long}?exclude=currently,flags,hourly,minutely`, {
+    return fetch(`https://api.darksky.net/forecast/${key}/${lat},${long}?exclude=currently,flags,hourly,minutely`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

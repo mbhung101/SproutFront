@@ -36,16 +36,14 @@ export default class AllMyPatches extends Component {
     imageMapper(imgs){
       if (imgs.length > 0){
       return imgs.map((img)=>
-      <Slide
-        src={img.url}>
-      </Slide>
+        <Slide src={img.url}>
+        </Slide>
       )
-    }else{
-      return 	<Slide
-		src="http://lorempixel.com/580/250/nature/1"
-		title="No pictures!">
-	   </Slide>
-    }
+      }else{
+        return
+        <Slide src="http://lorempixel.com/580/250/nature/1" title="No pictures!">
+	      </Slide>
+      }
     }
 
     yielder (yields){
@@ -102,6 +100,7 @@ export default class AllMyPatches extends Component {
 
     gardenDisplay (){
       return this.state.patches.map((patch)=>
+      <div style={{padding:10}}>
       <Card>
         <div className= "row">
           <div className= "col s4" >
@@ -112,7 +111,7 @@ export default class AllMyPatches extends Component {
           <div className= "col s4">
             <center> <h5> {patch.plant} </h5></center>
             <hr/>
-            <div style={{paddingTop:20}}>
+            <div>
             <p> Planted by: {patch.userName} </p>
             <p> Date planted: {patch.planted_on}</p>
             <p> Garden: {patch.garden}</p>
@@ -138,6 +137,7 @@ export default class AllMyPatches extends Component {
           </div>
         </div>
       </Card>
+      </div>
       )
     }
 
@@ -166,10 +166,10 @@ export default class AllMyPatches extends Component {
 
     render (){
       return (
-        <div>
+        <div style={{paddingTop:20}} >
           <Navbar style={{paddingLeft:20}} brand="All Plants"  className="light-green" right>
           </Navbar>
-          <div style={{paddingLeft:20}} className= "search-wrapper card">
+          <div style={{padding:20}} className= "search-wrapper card">
             <form onSubmit={this.onSearchSubmit}>
               <input type="text" name="search" placeholder="Search" value={this.state.search} onChange={this.handleChange} />
               <button className="btn waves-effect waves-light purple" type="submit" name="action"> Reset </button><br/>
