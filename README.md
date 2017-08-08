@@ -8,9 +8,9 @@ With Sprout you can:
 6. See when fruits and vegetables are being harvested
 7. Visually compare your plants to others
 
-![picture](src/images/download (3).png "1")
-![picture](src/images/download (4).png "2")
-![picture](src/images/download (5).png "3")
+![[Alt text](sc3.png)
+![[Alt text](sc2.png)
+![Alt text](sc3.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
